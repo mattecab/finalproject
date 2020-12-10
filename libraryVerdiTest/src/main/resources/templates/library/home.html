@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+
+<p align="center" th:text="${msg}" style="color: green"></p>
+<div>
+
+			
+				<td><a th:href="@{/books/show}">show</a></td>
+				
+		
+</div>
+<Br><Br><Br><Br>
+<div>
+		<table>
+			<tr>
+
+				<td><a th:href="@{/books/show}">Book List</a></td>
+				<td><a th:href="@{/cart/show}">My cart</a></td>
+				
+				
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

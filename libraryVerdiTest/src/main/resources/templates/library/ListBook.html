@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<h3>Book list</h3>
+
+
+
+<table>
+	<tr th:each="book:${books}" >
+		<td th:text="${book.id}"></td>
+		<td th:text="${book.name}"></td>
+		<td th:text="${book.author}"></td>
+		<td th:text="${book.status}"></td>
+		<td><a th:href="@{/cart/rent(bookId=${book.id})(customerId=${client.id})}">Add to
+
+				Cart</a></td>
+		<div th:object="${customer)}">
+			<label>Select Book</label>
+			<select id="selectBook" name="idCustomer">
+				
+				<option th:each="client : ${clients}" th:value="${client.id}" 
+					th:text="${client.id}+' : '+${client.title} "></option>
+			</select>
+		</div>
+	
+
+
+		
+	</tr>
+		
+
+</table>
+<Br><Br><Br><Br>
+<div>
+		<table>
+			<tr>
+
+				<td><a th:href="@{/home}">Home</a></td>
+				<td><a th:href="@{/cart/show}">My cart</a></td>
+				
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

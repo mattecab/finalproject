@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<h3>List of Rented Book</h3>
+
+
+
+<table>
+	<tr th:each="items:${session.cart}" th:unless="${session == null}">
+		<td th:text="${items.book.id}"></td>
+		<td th:text="${items.book.name}"></td>
+		<td th:text="${items.book.author}"></td>
+		<td><a
+			th:href="@{/cart/returnBook(bookId=${items.book.id})}">Return Book
+			
+			</a>
+			<a th:href="@{/cart/deleteCart}">Delete
+
+				Cart</a>
+				
+				</td>
+		
+			
+	</tr>
+</table>
+
+<Br><Br><Br><Br>
+<div>
+		<table>
+			<tr>
+
+				<td><a th:href="@{/books/show}">Book List</a></td>
+				<td><a th:href="@{library/home}">home</a></td>
+				
+				
+			</tr>
+		</table>
+	</div>
+	</html>
