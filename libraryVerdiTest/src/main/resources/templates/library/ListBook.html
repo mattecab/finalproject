@@ -8,7 +8,14 @@
 
 
 <table>
-
+<div th:object="${customer)}">
+			<label>Select Customer</label>
+			<select id="selectBook" name="idCustomer">
+				
+				<option th:each="client : ${clients}" th:value="${client.customer_id}" 
+					th:text="${client.customer_id}+' : '+${client.title} "></option>
+			</select>
+		</div>
 	<tr th:each="book:${books}" >
 		<td th:text="${book.book_id}"></td>
 		<td th:text="${book.name}"></td>
