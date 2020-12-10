@@ -1,15 +1,20 @@
 package com.example.libraryVerdi.boot.controller;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.libraryVerdi.boot.model.Customer;
 import com.example.libraryVerdi.boot.service.CustomerService;
 import com.example.libraryVerdi.boot.service.ReservationsService;
 
@@ -21,7 +26,7 @@ public class LoginController {
 
 	@Autowired
 	ReservationsService Resaservice;
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -32,7 +37,7 @@ public class LoginController {
 
 		//if (session.getAttribute("sid") == null) {
 
-			logger.info("Welcome home! The client locale is {}.", locale);
+		
 
 			Date date = new Date();
 			DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -66,13 +71,12 @@ public class LoginController {
 	@RequestMapping(value = { "/loginCustomer" }, method = RequestMethod.POST)
 	public String loginCustomer(@RequestParam("idCustomer") Long id, Model model, HttpSession session) {
 
-		Optional<Customer> foundCustomer = customerservice.findById(id);
+		Customer foundCustomer = customerservice.findById(id);
 
-		// Search for a book with an invalid ID
-		if (foundCustomer.isPresent())
+		
 
 		{
-			session.setAttribute("customer", foundCustomer.get());		
+			session.setAttribute("customer", foundCustomer);		
 			
 
 		}

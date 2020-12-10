@@ -21,8 +21,7 @@ import com.example.libraryVerdi.boot.utils.StatusSession;
 public class BookController {
 	@Autowired
 	BookService service;
-	@Autowired
-	ReservationsService Resaservice;
+	
 	@Autowired
 	CustomerService clientservice;
 	

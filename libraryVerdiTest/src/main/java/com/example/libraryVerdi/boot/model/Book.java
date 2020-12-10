@@ -31,8 +31,8 @@ public class Book {
 	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reservations> reservations;
 
-public Book(Long id, String name, String author) {
-	this.id=id;
+public Book(Long book_id, String name, String author) {
+	this.book_id=book_id;
 	this.name=name;
 	this.author=author;
 }

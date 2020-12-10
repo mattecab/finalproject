@@ -49,10 +49,11 @@ public class CartController {
 		return "library/Cart";
 	}
 
-	@RequestMapping(value = "rent", method = RequestMethod.GET)
+	@RequestMapping(value = "rent", method = RequestMethod.POST)
 	public String add(@RequestParam("bookId") Long book_id, HttpSession session,Locale locale,@RequestParam("customerId") Long customer_id) {
 
-
+        System.out.println(book_id);
+        System.out.println(customer_id);
 		List<BookRented> cart ;
 
 		// ProductModel productModel = new ProductModel();
@@ -107,15 +108,15 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "returnBook", method = RequestMethod.GET)
-	public String bookback(@RequestParam("bookId") Long id, HttpSession session,Locale locale) {
+	public String bookback(@RequestParam("bookId") Long book_id, HttpSession session,Locale locale) {
 
 		// ProductModel productModel = new ProductModel();
 		List<BookRented> cart = (List<BookRented>) session.getAttribute("cart");
-		int index = exists(id, cart);
+		int index = exists(book_id, cart);
 		cart.remove(index);
 		session.setAttribute("cart", cart);
 		
-		Book bookstatus= service.findById(id);
+		Book bookstatus= service.findById(book_id);
         bookstatus.setStatus(StatusSession.AVAILABLE);
         service.insertBook(bookstatus);
         
@@ -126,7 +127,7 @@ public class CartController {
         Reservations resa = new Reservations();
         resa.setStatus(StatusSession.AVAILABLE.toString());
 		resa.setDate(formattedDate);
-		resa.setBook(service.findById(id));
+		resa.setBook(service.findById(book_id));
         Resaservice.insertReservations(resa);
 		
 		return "redirect:/cart/show";
@@ -141,11 +142,11 @@ public class CartController {
 
 		return "library/home";
 	}
-	private static int exists(Long id, List<BookRented> cart) {
+	private static int exists(Long book_id, List<BookRented> cart) {
 
 		for (int i = 0; i < cart.size(); i++) {
 
-			if (cart.get(i).getBook().getId() == id) {
+			if (cart.get(i).getBook().getId() == book_id) {
 				return i;
 			}
 

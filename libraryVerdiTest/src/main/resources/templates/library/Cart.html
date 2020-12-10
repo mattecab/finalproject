@@ -8,11 +8,11 @@
 
 <table>
 	<tr th:each="items:${session.cart}" th:unless="${session == null}">
-		<td th:text="${items.book.id}"></td>
+		<td th:text="${items.book.book_id}"></td>
 		<td th:text="${items.book.name}"></td>
 		<td th:text="${items.book.author}"></td>
 		<td><a
-			th:href="@{/cart/returnBook(bookId=${items.book.id})}">Return Book
+			th:href="@{/cart/returnBook(bookId=${items.book.book_id})}">Return Book
 			
 			</a>
 			<a th:href="@{/cart/deleteCart}">Delete
