@@ -25,7 +25,7 @@ public class CustomerService {
 	}
 	
 	
-	public Optional<Customer> findById (long customer_id) {
+	public Customer findById (long customer_id) {
 
 		return repository.findById(customer_id);
 	}
