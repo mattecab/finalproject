@@ -36,9 +36,9 @@ public class BookService {
 		repository.delete(book);
 	}
 
-	public Book findById(long book_id) {
+	public Book findById(long id) {
 
-		return repository.findById(book_id);
+		return repository.findById(id);
 	
 
 }}

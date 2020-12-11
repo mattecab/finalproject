@@ -11,7 +11,7 @@ import com.example.libraryVerdi.boot.model.Book;
 public interface BookRepository extends CrudRepository<Book, Long> {
 
 
-	Book findById(long book_id);
+	Book findById(long id);
 	
 
 }

@@ -28,7 +28,7 @@ public class BookController {
 	@RequestMapping("/show")
 	public String show(Model model) {
 		model.addAttribute("books", service.findAll());
-		model.addAttribute("clients",  clientservice.findAll());
+		
 		
 		return "library/ListBook";
 	}

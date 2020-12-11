@@ -25,9 +25,9 @@ public class CustomerService {
 	}
 	
 	
-	public Customer findById (long customer_id) {
+	public Customer findById (long id) {
 
-		return repository.findById(customer_id);
+		return repository.findById(id);
 	}
 
 }

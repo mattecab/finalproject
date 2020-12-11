@@ -20,8 +20,8 @@ import com.example.libraryVerdi.boot.utils.StatusSession;
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "BOOK_ID")
-	private Long book_id;
+	@Column(name = "ID")
+	private Long id;
 	@Column(name = "NAME")
 	private String name;
 	@Column(name = "AUTHOR")
@@ -31,8 +31,8 @@ public class Book {
 	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reservations> reservations;
 
-public Book(Long book_id, String name, String author) {
-	this.book_id=book_id;
+public Book(Long id, String name, String author) {
+	this.id=id;
 	this.name=name;
 	this.author=author;
 }
@@ -55,13 +55,13 @@ public void setReservations(List<Reservations> reservations) {
 
 
 public Long getId() {
-	return book_id;
+	return id;
 }
 
 
 
-public void setId(Long book_id) {
-	this.book_id = book_id;
+public void setId(Long id) {
+	this.id = id;
 }
 
 
@@ -92,7 +92,7 @@ public void setAuthor(String author) {
 
 @Override
 public String toString() {
-	return "Book [id=" + book_id + ", name=" + name + ", author=" + author + "]";
+	return "Book [id=" + id + ", name=" + name + ", author=" + author + "]";
 }
 
 public StatusSession getStatus() {

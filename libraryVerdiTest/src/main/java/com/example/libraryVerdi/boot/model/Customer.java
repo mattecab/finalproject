@@ -20,8 +20,8 @@ public class Customer {
 	// ...
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "CUSTOMER_ID")
-	private Long customer_id;
+	@Column(name = "ID")
+	private Long id;
 	@Column(name = "FIRSTNAME")
 	private String firstName;
 	@Column(name = "LASTNAME")
@@ -38,11 +38,11 @@ public Customer(String firstName, String lastName) {
 }
 
 public Long getId() {
-	return customer_id;
+	return id;
 }
 
-public void setId(Long customer_id) {
-	this.customer_id = customer_id;
+public void setId(Long id) {
+	this.id = id;
 }
 
 public String getFirstName() {
@@ -73,7 +73,7 @@ public void setReservations(List<Reservations> reservations) {
 
 @Override
 public String toString() {
-	return "Customer [id=" + customer_id + ", firstName=" + firstName + ", lastName=" + lastName + ", reservations="
+	return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", reservations="
 			+ reservations + "]";
 }}
 	

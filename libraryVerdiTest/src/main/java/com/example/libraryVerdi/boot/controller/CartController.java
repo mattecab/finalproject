@@ -49,22 +49,22 @@ public class CartController {
 		return "library/Cart";
 	}
 
-	@RequestMapping(value = "rent", method = RequestMethod.POST)
-	public String add(@RequestParam("bookId") Long book_id, HttpSession session,Locale locale,@RequestParam("customerId") Long customer_id) {
+	@RequestMapping(value = "rent", method = RequestMethod.GET)
+	public String add(@RequestParam("bookId") Long id, HttpSession session,Locale locale) {
 
-        System.out.println(book_id);
-        System.out.println(customer_id);
-		List<BookRented> cart ;
+       
+        
+	
 
 		// ProductModel productModel = new ProductModel();
 		if (session.getAttribute("cart") == null) {
 
-			cart = new ArrayList<BookRented>();
-			cart.add(new BookRented(service.findById(book_id)));
+			List<BookRented> cart = new ArrayList<BookRented>();
+			cart.add(new BookRented(service.findById(id)));
 			session.setAttribute("cart", cart);
             
            
-            service.findById(book_id).setStatus(StatusSession.RENTED);
+            service.findById(id).setStatus(StatusSession.RENTED);
             
             //String sid = session.getId();
     		//session.setAttribute("sid", sid);
@@ -75,20 +75,20 @@ public class CartController {
             String formattedDate = dateFormat.format(date);
             
             Reservations resa = new Reservations();
-            resa.setBook(service.findById(book_id));
+            resa.setBook(service.findById(id));
             resa.setStatus(StatusSession.RENTED.toString());
             resa.setDate(formattedDate);
-            resa.setCustomer(clientservice.findById(customer_id));
+            
 			Resaservice.insertReservations(resa);
 
 		} 
 		
 		else {
 
-			cart = (List<BookRented>) session.getAttribute("cart");
-            cart.add(new BookRented(service.findById(book_id)));
+			List<BookRented> cart = (List<BookRented>) session.getAttribute("cart");
+            cart.add(new BookRented(service.findById(id)));
 			session.setAttribute("cart", cart);
-			service.findById(book_id).setStatus(StatusSession.RENTED);
+			service.findById(id).setStatus(StatusSession.RENTED);
 	            
 	            
 	            Date date = new Date();
@@ -97,7 +97,7 @@ public class CartController {
 	           
 	            Reservations resa = new Reservations();
 	            resa.setDate(formattedDate);
-				resa.setBook(service.findById(book_id));
+				resa.setBook(service.findById(id));
 	            resa.setStatus(StatusSession.RENTED.toString());
 	            Resaservice.insertReservations(resa);
 		}
@@ -108,15 +108,15 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "returnBook", method = RequestMethod.GET)
-	public String bookback(@RequestParam("bookId") Long book_id, HttpSession session,Locale locale) {
+	public String bookback(@RequestParam("bookId") Long id, HttpSession session,Locale locale) {
 
 		// ProductModel productModel = new ProductModel();
 		List<BookRented> cart = (List<BookRented>) session.getAttribute("cart");
-		int index = exists(book_id, cart);
+		int index = exists(id, cart);
 		cart.remove(index);
 		session.setAttribute("cart", cart);
 		
-		Book bookstatus= service.findById(book_id);
+		Book bookstatus= service.findById(id);
         bookstatus.setStatus(StatusSession.AVAILABLE);
         service.insertBook(bookstatus);
         
@@ -127,7 +127,7 @@ public class CartController {
         Reservations resa = new Reservations();
         resa.setStatus(StatusSession.AVAILABLE.toString());
 		resa.setDate(formattedDate);
-		resa.setBook(service.findById(book_id));
+		resa.setBook(service.findById(id));
         Resaservice.insertReservations(resa);
 		
 		return "redirect:/cart/show";
@@ -142,11 +142,11 @@ public class CartController {
 
 		return "library/home";
 	}
-	private static int exists(Long book_id, List<BookRented> cart) {
+	private static int exists(Long id, List<BookRented> cart) {
 
 		for (int i = 0; i < cart.size(); i++) {
 
-			if (cart.get(i).getBook().getId() == book_id) {
+			if (cart.get(i).getBook().getId() == id) {
 				return i;
 			}
 

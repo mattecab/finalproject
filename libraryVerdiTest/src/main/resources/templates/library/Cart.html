@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
 
 <h3>List of Rented Book</h3>
 
 
 
-<table>
+<table class="w3-table-all">
+<thead>
+      <tr class="w3-light-grey w3-hover-red">
+        <th>Book ID</th>
+        <th>Book Title</th>
+        <th>Book Author</th>
+        <th>Action</th>
+      </tr>
+    </thead>
 	<tr th:each="items:${session.cart}" th:unless="${session == null}">
-		<td th:text="${items.book.book_id}"></td>
+		<td th:text="${items.book.id}"></td>
 		<td th:text="${items.book.name}"></td>
 		<td th:text="${items.book.author}"></td>
 		<td><a
-			th:href="@{/cart/returnBook(bookId=${items.book.book_id})}">Return Book
+			th:href="@{/cart/returnBook(bookId=${items.book.id})}">Return Book
 			
 			</a>
 			<a th:href="@{/cart/deleteCart}">Delete

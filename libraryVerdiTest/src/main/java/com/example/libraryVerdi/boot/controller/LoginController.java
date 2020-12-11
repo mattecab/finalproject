@@ -82,13 +82,6 @@ public class LoginController {
 		}
 
 		return "/home";
-	}
+	}}
 
-	@RequestMapping(value = { "/*" }, method = RequestMethod.GET)
-	public String error(Locale locale, Model model, HttpSession session) {
-
-		// to-do error site
-		return "shoping/error";
-	}
-
-}
+	
